@@ -37,7 +37,6 @@ export class SinkService {
     let params = new URLSearchParams();
 
     sinks.forEach(sink => {
-      console.log(sink.id);
       params.append("ids", sink.id.toString());
     });
 
@@ -48,8 +47,7 @@ export class SinkService {
       .get("http://localhost:8080/duvana/downloadExcel", options)
       .subscribe(response => {
         let blob = new Blob([response.blob()], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-        console.log(blob);
-        var filename = 'Comptes-Serveurs.xlsx';
+        var filename = 'duvana-report.xlsx';
         saveAs(blob, filename);
       });
   }

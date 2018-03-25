@@ -25,6 +25,7 @@ export class SearchResultComponent implements OnInit {
     this.params = params;
     this.sinkService.getSinksData(params).subscribe((sinks: Array<Sink>) => {
        this.sinks = sinks;
+       console.log(sinks);
     });
   }
 
