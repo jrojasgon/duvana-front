@@ -14,7 +14,7 @@ export class SinkService {
   constructor(private httpService: Http) { }
 
   getSinksData(params: Params): Observable<Array<Sink>> {
-    console.log("launch search");
+
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -26,30 +26,24 @@ export class SinkService {
 
     let options = new RequestOptions({ headers: headers, params: myParams });
 
-    return this.httpService.get('http://localhost:8080/search/test', options).map(res => res.json());;
+    return this.httpService.get('http://localhost:8080/search/test', options).map(res => res.json());
   }
 
-  downloadFile(sinks: Array<Sink>) {
+  downloadFile(sinks: Array<Sink>): Observable<Response> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
     let params = new URLSearchParams();
+    let observer: Observable<boolean>;
 
     sinks.forEach(sink => {
       params.append("ids", sink.id.toString());
     });
 
-    console.log(params);
-
     let options = new RequestOptions({ headers: headers, params: params, responseType: ResponseContentType.Blob });
-    this.httpService
-      .get("http://localhost:8080/duvana/downloadExcel", options)
-      .subscribe(response => {
-        let blob = new Blob([response.blob()], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-        var filename = 'duvana-report.xlsx';
-        saveAs(blob, filename);
-      });
+    return this.httpService.get('http://localhost:8080/duvana/downloadExcel', options).map(res => res.json());
+
   }
 
   private handleError(erreur: Response | any) {

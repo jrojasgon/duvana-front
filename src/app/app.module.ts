@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import { ClientService } from './shared/services/client.service';
 import { SinkService } from './shared/services/sink.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SinkService } from './shared/services/sink.service';
     FormsModule,
     ReactiveFormsModule,
     AppRouting,
+    NgxPaginationModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [ClientService, SinkService],
