@@ -26,7 +26,7 @@ export class SinkService {
 
     let options = new RequestOptions({ headers: headers, params: myParams });
 
-    return this.httpService.get('http://localhost:8080/search/test', options).map(res => res.json());
+    return this.httpService.get('http://ec2-18-188-7-176.us-east-2.compute.amazonaws.com:8084/search/test', options).map(res => res.json());
   }
 
   downloadFile(sinks: Array<Sink>): Observable<Response> {
